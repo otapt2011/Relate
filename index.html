@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relate - Social Relationship Manager</title>
+    
+    <!-- Optimized CSS - 5 files -->
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/addData.css">
+<style>
+#pillsRow{
+display: none;
+}
+.badge-pill{
+padding: 0px 0px!important;
+color: var(--text-muted);
+margin-top: -6px;
+background: var(--bg-pill);
+border: 1px solid var(--border-color);
+border-radius: 8px;
+min-width: 18px;
+min-height: 18px;
+width: 18px;
+height: 18px;
+}
+.badges-container{
+column-gap: 10px;
+}
+.avatar-wrapper{
+background: none!important;
+}
+.avatar-img{
+
+}
+.app-header{
+margin-bottom: 0px;
+box-shadow: var(--shadow-lg);
+}
+.actions-row{
+margin-bottom: 10px;
+}
+.cards-grid{
+row-gap: 5px;
+}
+.nick{
+font-size: 13px;
+}
+.handle{
+font-size: 11px;
+}
+.card {
+padding-top: 6px !important;
+padding-bottom: 0px !important;
+min-height: 70px!important;
+}
+.card:has(.badges-container:empty){
+min-height: 60px!important;
+}
+button.favorite{
+height:30px;
+width: 30px;
+padding: 0px;
+}
+</style>
+</head>
+<body data-theme="dark">
+    <!-- Sticky Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <img src="assets/logo.svg" alt="Relate" class="logo">
+            <h1>Relate</h1>
+        </div>
+        <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">🌙</button>
+    </header>
+
+    <div class="container">
+        <div class="controls-row">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search friends..." aria-label="Search friends">
+                <button id="clearSearch" class="icon-btn" aria-label="Clear search">✕</button>
+            </div>
+
+            <div class="segmented">
+                <button data-seg="all" class="active">All</button>
+                <button data-seg="friends">Friends</button>
+                <button data-seg="following">Following</button>
+                <button data-seg="followers">Followers</button>
+                <button data-seg="suggested">Suggested</button>
+                <button data-seg="online">Online</button>
+                <button data-seg="favorites">Favorites</button>
+            </div>
+        </div>
+
+        <div id="pillsRow" class="pills-row"></div>
+
+        <div class="actions-row">
+            <!-- Add Friend button will be inserted here by addData.js -->
+            <div class="dropdown" id="sortDropdown">
+                <button class="icon-btn" aria-haspopup="true" aria-expanded="false">Sort ↓</button>
+                <div class="select-panel">
+                    <button data-sort="original">Original Order</button>
+                    <button data-sort="following">By Relationship</button>
+                    <button data-sort="favorites">Favorites First</button>
+                    <button data-sort="rank-asc">Rank ↑</button>
+                    <button data-sort="rank-desc">Rank ↓</button>
+                    <button data-sort="az">A → Z</button>
+                    <button data-sort="za">Z → A</button>
+                </div>
+            </div>
+
+            <div class="dropdown" id="filterDropdown">
+                <button class="icon-btn" aria-haspopup="true" aria-expanded="false">Filter +</button>
+                <div class="select-panel">
+                    <button data-filter="online">Online Only</button>
+                    <button data-filter="emoji">Has Emoji</button>
+                    <button data-filter="long">Long Username</button>
+                    <button data-filter="has-badge">Has Badge</button>
+                    <hr>
+                    <button data-filter="clear-all">Clear All</button>
+                </div>
+            </div>
+        </div>
+
+        <main id="listArea" class="cards-grid" aria-busy="true"></main>
+    </div>
+
+    <!-- Fixed Footer -->
+    <footer class="app-footer">
+        <div class="footer-text">Relate • Manage your social relationships</div>
+    </footer>
+
+    <button id="scrollTop" class="scroll-top" aria-label="Scroll to top">↑</button>
+
+    <!-- Optimized JavaScript - 5 files -->
+    <script src="assets/js/core.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/render.js"></script>
+    <script src="assets/js/addData.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
