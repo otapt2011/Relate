@@ -1,0 +1,199 @@
+/* ----------------- RESPONSIVE DESIGN ----------------- */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-sm);
+    height: calc(100dvh - 56px - 24px);
+  }
+  
+  .app-header {
+    padding: var(--space-sm);
+    height: 56px;
+  }
+  
+  .app-header .logo {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .app-header h1 {
+    font-size: var(--text-xl);
+  }
+  
+  .controls-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  
+  .segmented {
+    width: 100%;
+    justify-content: stretch;
+    overflow-x: auto;
+  }
+  
+  .segmented button {
+    flex: 1;
+    text-align: center;
+    min-width: 80px;
+    font-size: var(--text-xs);
+    padding: var(--space-sm) var(--space-sm);
+  }
+  
+  .segment-count {
+    top: -4px;
+    right: -4px;
+    min-width: 16px;
+    height: 16px;
+    font-size: 0.6rem;
+    padding: 0 3px;
+  }
+  
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  
+  .card {
+    padding: var(--space-md) !important;
+    min-height: 100px;
+  }
+  
+  .card-top {
+    gap: var(--space-sm);
+    grid-template-columns: auto 1fr;
+  }
+  
+  .avatar-wrapper {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .meta {
+    padding-right: 70px; /* Adjusted for smaller buttons on mobile */
+  }
+  
+  .action-buttons {
+    gap: var(--space-xs);
+  }
+  
+  .favorite,
+  .follow-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+  }
+  
+  .scroll-top {
+    bottom: calc(var(--space-md) + 24px);
+    right: var(--space-md);
+    width: 44px;
+    height: 44px;
+  }
+  
+  .actions-row {
+    flex-wrap: wrap;
+  }
+  
+  .dropdown {
+    flex: 1;
+    min-width: 140px;
+  }
+
+  #listArea::-webkit-scrollbar {
+    width: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    margin-bottom: var(--space-lg);
+    height: 52px;
+  }
+  
+  .app-header h1 {
+    font-size: var(--text-lg);
+  }
+  
+  .app-header .logo {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .container {
+    height: calc(100dvh - 52px - 24px);
+  }
+  
+  .card {
+    padding: var(--space-md) !important;
+    min-height: 90px;
+  }
+  
+  .card-top {
+    grid-template-columns: auto 1fr;
+    gap: var(--space-sm);
+  }
+  
+  .avatar-wrapper {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .meta {
+    padding-right: 65px; /* Slightly less padding on very small screens */
+  }
+  
+  .favorite,
+  .follow-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+  
+  .dropdown {
+    min-width: 120px;
+  }
+  
+  .select-panel {
+    min-width: 160px;
+  }
+  
+  .segment-count {
+    min-width: 14px;
+    height: 14px;
+    font-size: 0.55rem;
+    top: -3px;
+    right: -3px;
+  }
+
+  #listArea::-webkit-scrollbar {
+    display: none;
+  }
+  
+  #listArea {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Scrollbar fallback for all screen sizes */
+#listArea {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-primary) var(--bg-secondary);
+}
+
+#listArea::-webkit-scrollbar {
+  width: 6px;
+}
+
+#listArea::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 3px;
+}
+
+#listArea::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 3px;
+}
+
+#listArea::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-hover);
+}

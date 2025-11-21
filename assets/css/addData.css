@@ -1,0 +1,221 @@
+/* ----------------- ADD DATA FORM STYLES ----------------- */
+#formOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  animation: fadeIn var(--transition-normal);
+}
+
+#addFriendForm {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  min-width: 400px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+  animation: slideDown var(--transition-normal);
+}
+
+#addFriendForm .form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+#addFriendForm .form-header h3 {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+#addFriendForm .form-group {
+  margin-bottom: var(--space-lg);
+}
+
+#addFriendForm label {
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+}
+
+#addFriendForm input {
+  width: 100%;
+  padding: var(--space-md);
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-size: 16px; /* Prevents zoom on iOS */
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(10px);
+  -webkit-appearance: none; /* Removes inner shadow on iOS */
+  appearance: none;
+}
+
+#addFriendForm input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  background: var(--bg-input-focus);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  transform: none; /* Prevents any transform that might cause zoom */
+}
+
+#addFriendForm input::placeholder {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+#addFriendForm .form-actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: flex-end;
+  margin-top: var(--space-xl);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-color);
+}
+
+#addFriendForm .form-actions .icon-btn {
+  padding: var(--space-md) var(--space-lg);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+#addFriendForm .form-actions .submit-btn {
+  background: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
+}
+
+#addFriendForm .form-actions .submit-btn:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.success-message {
+  position: fixed;
+  top: var(--space-xl);
+  right: var(--space-xl);
+  background: var(--accent-primary);
+  color: white;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-lg);
+  z-index: 1002;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  animation: slideInRight var(--transition-normal);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.success-message::before {
+  content: "✓";
+  font-weight: bold;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Prevent zoom on mobile for all inputs in the app */
+@media screen and (max-width: 768px) {
+  #addFriendForm input,
+  .search-box input {
+    font-size: 16px !important; /* Force 16px to prevent zoom */
+    transform: scale(1); /* Ensure no scaling */
+  }
+  
+  #addFriendForm {
+    /* Ensure form doesn't cause viewport issues */
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Responsive design for the form */
+@media (max-width: 480px) {
+  #addFriendForm {
+    min-width: 90vw;
+    padding: var(--space-lg);
+    margin: var(--space-md);
+    border-radius: var(--radius-lg);
+  }
+  
+  #addFriendForm .form-actions {
+    flex-direction: column;
+  }
+  
+  #addFriendForm .form-actions .icon-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Ensure inputs are comfortable on mobile */
+  #addFriendForm input {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* Add this to your existing addData.css */
+#addFriendForm select {
+  width: 100%;
+  padding: var(--space-md);
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(10px);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+#addFriendForm select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  background: var(--bg-input-focus);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}

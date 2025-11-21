@@ -1,0 +1,514 @@
+/* ----------------- BUTTON COMPONENTS ----------------- */
+.icon-btn {
+  background: var(--bg-pill);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: var(--space-sm);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-input);
+  transform: scale(1.05);
+}
+
+/* Segmented Controls */
+.segmented {
+  display: inline-flex;
+  background: var(--bg-secondary);
+  padding: var(--space-xs);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  gap: var(--space-xs);
+}
+
+.segmented button {
+  position: relative;
+  padding: var(--space-sm) var(--space-md);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.segmented button:hover {
+  color: var(--text-primary);
+  background: var(--bg-pill);
+}
+
+.segmented button.active {
+  background: var(--accent-primary);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Segment Count Badge */
+.segment-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #ef4444;
+  color: white;
+  border-radius: var(--radius-full);
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--bg-secondary);
+}
+
+/* Scroll to Top */
+.scroll-top {
+  position: fixed;
+  bottom: var(--space-xl);
+  right: var(--space-xl);
+  width: 48px;
+  height: 48px;
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all var(--transition-normal);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.scroll-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-top:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* ----------------- CARD COMPONENTS ----------------- */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: var(--space-card) !important;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  backdrop-filter: blur(10px);
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.card.entered {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-top {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-md);
+  align-items: start;
+  width: 100%;
+  position: relative; /* For absolute positioning of action buttons */
+}
+
+/* Avatar */
+.avatar-wrapper {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #1b1f25, #111217);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-full);
+}
+
+/* Fixed Online Dot Animation */
+.online-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 0px;
+  width: 12px;
+  height: 12px;
+  background: var(--online);
+  border: 1px solid var(--bg-card);
+  border-radius: var(--radius-full);
+  z-index: 2;
+}
+
+.online-dot:not(.offline) {
+  animation: pulse-online 2s infinite;
+}
+
+.online-dot.offline {
+  background: var(--offline);
+  animation: none;
+  display: none;
+}
+
+@keyframes pulse-online {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    transform: scale(1);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+    transform: scale(1.1);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    transform: scale(1);
+  }
+}
+
+/* Meta */
+.meta {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding-right: 80px; /* Space for absolute positioned action buttons */
+}
+
+.nick {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+  width: 100%;
+}
+
+.handle {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+  margin-bottom: var(--space-sm);
+  width: 100%;
+}
+
+/* Badges - FIXED: Icon-based badges */
+.badges-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+  max-width: 100%;
+}
+
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 8px;
+  background: linear-gradient(135deg, var(--accent-primary), #8b5cf6);
+  color: white;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 24px;
+  height: 20px;
+  transition: all var(--transition-fast);
+}
+
+.badge-pill:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-md);
+}
+
+.badge-pill svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+}
+
+/* Action Buttons Container - ABSOLUTE POSITIONING */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+
+/* Favorite Button */
+.favorite {
+  background: var(--bg-pill);
+  border: 1px solid var(--border-color);
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: var(--space-xs);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.favorite:hover {
+  color: var(--accent-favorite);
+  background: rgba(236, 72, 153, 0.1);
+  border-color: var(--accent-favorite);
+  transform: scale(1.1);
+}
+
+.favorite.active {
+  color: var(--accent-favorite);
+  background: rgba(236, 72, 153, 0.15);
+  border-color: var(--accent-favorite);
+}
+
+/* Follow Button */
+.follow-btn {
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.follow-btn:hover {
+  background: var(--accent-hover);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-md);
+}
+
+.follow-btn.active {
+  background: var(--success-color, #10b981);
+  color: white;
+}
+
+/* ----------------- DROPDOWN COMPONENTS ----------------- */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown .icon-btn {
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  white-space: nowrap;
+}
+
+.dropdown .icon-btn:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-card);
+}
+
+.dropdown.open .icon-btn {
+  border-color: var(--accent-primary);
+  background: var(--bg-card);
+}
+
+.select-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: var(--space-xs);
+  background: var(--bg-dropdown);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm);
+  min-width: 180px;
+  box-shadow: var(--shadow-xl);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all var(--transition-normal);
+}
+
+.dropdown.open .select-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.select-panel button {
+  display: block;
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.select-panel button:hover {
+  background: var(--bg-pill);
+}
+
+.select-panel hr {
+  margin: var(--space-xs) 0;
+  border: none;
+  border-top: 1px solid var(--border-color);
+}
+
+/* ----------------- FORM COMPONENTS ----------------- */
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 400px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: var(--space-sm) var(--space-lg) var(--space-sm) var(--space-md);
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-size: 16px;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(10px);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  background: var(--bg-input-focus);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  transform: none;
+}
+
+.search-box input::placeholder {
+  color: var(--text-muted);
+}
+
+#clearSearch {
+  position: absolute;
+  right: var(--space-sm);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: var(--space-xs);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+#clearSearch:hover {
+  color: var(--text-primary);
+  background: var(--bg-pill);
+}
+
+/* Mobile fix for search input */
+@media screen and (max-width: 768px) {
+  .search-box input {
+    font-size: 16px !important;
+  }
+}
+
+/* ----------------- PILL COMPONENTS ----------------- */
+.pill {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  background: var(--bg-pill);
+  padding: 6px 10px;
+  border-radius: var(--radius-full);
+  margin-right: 8px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+}
+
+.pill span:last-child {
+  margin-left: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+}
+
+.pill span:last-child:hover {
+  opacity: 1;
+}

@@ -1,0 +1,169 @@
+/* ----------------- BASE LAYOUT ----------------- */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100dvh;
+  overflow: hidden; /* Prevent body scrolling */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----------------- MAIN CONTAINER ----------------- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-md);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Container doesn't scroll */
+  height: calc(100dvh - 60px - 24px); /* Viewport - header - footer */
+  box-sizing: border-box;
+  padding-top: calc(var(--space-md) + 80px); /* Account for sticky header */
+  padding-bottom: calc(var(--space-md) + 30px); /* Account for footer */
+}
+
+/* ----------------- SCROLLABLE LIST AREA ----------------- */
+#listArea {
+  flex: 1;
+  overflow-y: auto; /* Only list area scrolls */
+  overflow-x: hidden;
+  min-height: 0; /* Allow shrinking */
+}
+
+/* Custom scrollbar for list area */
+#listArea::-webkit-scrollbar {
+  width: 6px;
+}
+
+#listArea::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 3px;
+}
+
+#listArea::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 3px;
+}
+
+#listArea::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-hover);
+}
+
+/* ----------------- STICKY HEADER ----------------- */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md);
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  flex-shrink: 0;
+  height: 60px; /* Fixed header height */
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.app-header .header-content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.app-header .logo {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+}
+
+/* Logo theming */
+[data-theme="dark"] .logo {
+  color: var(--accent-primary);
+  filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
+}
+
+[data-theme="light"] .logo {
+  color: var(--accent-primary);
+  filter: drop-shadow(0 0 4px rgba(99, 102, 241, 0.3));
+}
+
+.app-header .logo:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2) drop-shadow(0 0 12px rgba(99, 102, 241, 0.6));
+}
+
+.app-header h1 {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-primary), #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+/* ----------------- FIXED FOOTER ----------------- */
+.app-footer {
+  height: 24px; /* Fixed footer height */
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+  backdrop-filter: blur(10px);
+  flex-shrink: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.footer-text {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ----------------- CONTROLS ROW ----------------- */
+.controls-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  align-items: start;
+  flex-shrink: 0; /* Prevent controls from shrinking */
+}
+
+/* ----------------- ACTIONS ROW ----------------- */
+.actions-row {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+  flex-shrink: 0; /* Prevent actions from shrinking */
+}
+
+/* ----------------- CARDS GRID ----------------- */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+
+/* ----------------- PILLS ROW ----------------- */
+.pills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  min-height: 32px;
+  flex-shrink: 0; /* Prevent pills from shrinking */
+}
