@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Relate - sqlite-wasm Demo Import</title>
+  <style>
+    body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; padding: 24px; }
+    button { padding: 8px 12px; font-size: 16px; }
+    pre { background:#f6f8fa; padding:12px; border-radius:6px; white-space:pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>Relate — sqlite-wasm demo</h1>
+  <p>This page demonstrates initializing the sql.js WASM DB, applying the schema, importing <code>assets/users.json</code> into the <code>users</code> table, and persisting the DB to IndexedDB.</p>
+  <p>Before using this demo, run <code>npm install sql.js</code> and ensure <code>sql-wasm.wasm</code> is served at <code>/node_modules/sql.js/dist/sql-wasm.wasm</code>, or adjust the locateFile path in the script below.</p>
+  <button id="initBtn">Initialize & Import</button>
+  <button id="clearBtn">Clear persisted DB</button>
+  <pre id="log">Logs will appear here...
+</pre>
+
+  <script type="module">
+    import DB from '../src/db/sqlite-wasm.js';
+
+    const logEl = document.getElementById('log');
+    function log(...args){
+      const line = args.map(a=> (typeof a === 'object' ? JSON.stringify(a, null, 2) : String(a))).join(' ');
+      logEl.textContent += line + '\n';
+      logEl.scrollTop = logEl.scrollHeight;
+      console.debug(...args);
+    }
+
+    document.getElementById('initBtn').addEventListener('click', async () => {
+      try {
+        log('Initializing sql.js...');
+        await DB.init({ locateFile: file => '/node_modules/sql.js/dist/sql-wasm.wasm' });
+        log('Opening DB (IndexedDB)...');
+        await DB.openFromIndexedDB();
+        log('Loading and applying schema...');
+        const schema = await fetch('/src/db/schema.sql').then(r=>r.text());
+        DB.execSchema(schema);
+        log('Importing users.json (merge=false)...');
+        const imported = await DB.importUsersFromRepoJSON('/assets/users.json', { merge: false });
+        log(`Imported ${imported} rows from assets/users.json`);
+        await DB.saveToIndexedDB();
+        log('Saved DB to IndexedDB.');
+        const rows = DB.query('SELECT COUNT(*) as cnt FROM users');
+        const cnt = rows && rows[0] && (rows[0].cnt || rows[0]['COUNT(*)'] || Object.values(rows[0])[0]);
+        log('Users in DB:', cnt);
+        log('Example row (first 5):');
+        const sample = DB.query('SELECT id,nickname,username,avatar,relationship FROM users ORDER BY username LIMIT 5');
+        log(sample);
+      } catch (err) {
+        log('Error:', err && err.message ? err.message : err);
+        console.error(err);
+      }
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', async () => {
+      // Clear the persisted DB from IndexedDB
+      try {
+        const idbOpen = () => new Promise((resolve, reject) => {
+          const req = indexedDB.open('relate_sqlite_store', 1);
+          req.onupgradeneeded = () => {
+            const idb = req.result;
+            if (!idb.objectStoreNames.contains('databases')) idb.createObjectStore('databases', { keyPath: 'key' });
+          };
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => reject(req.error);
+        });
+        const idb = await idbOpen();
+        const tx = idb.transaction(['databases'], 'readwrite');
+        tx.objectStore('databases').delete('relate_sqlite_v1');
+        tx.oncomplete = () => log('Cleared persisted DB key relate_sqlite_v1');
+        tx.onerror = () => log('Failed to clear persisted DB', tx.error || 'unknown');
+      } catch(e){ log('Clear error', e); }
+    });
+  </script>
+</body>
+</html>
